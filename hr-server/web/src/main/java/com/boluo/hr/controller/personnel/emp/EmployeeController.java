@@ -115,7 +115,8 @@ public class EmployeeController {
     @PostMapping("/top/search/{pageNum}/{pageSize}")
     public RespEmpBean topSerach(@PathVariable("pageNum") Integer pageNum,@PathVariable("pageSize") Integer pageSize, Employee employee) {
         RespEmpBean reb = new RespEmpBean();
-        List<Employee> list = empLoyeeService.TipSerchByEmp(pageNum,pageSize,employee);
+        System.out.println(employee);
+        List<Employee> list = empLoyeeService.TipSerchByEmp(pageNum-1,pageSize,employee);
         int i = empLoyeeService.TipCount(employee);
         reb.setEmployees(list);
         reb.setTotal(i);

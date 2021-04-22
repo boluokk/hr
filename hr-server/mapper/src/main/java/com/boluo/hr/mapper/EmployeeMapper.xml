@@ -107,6 +107,9 @@
      <if test="employee.posid != null and employee.posid!= ''">
        and emp.posid = #{employee.posid}
      </if>
+    <if test="employee.departmentid != null and employee.departmentid!= ''">
+      and emp.departmentid = #{employee.departmentid}
+    </if>
      <if test="employee.begindate !=null and employee.conversiontime !=null">
         and emp.begindate between #{employee.begindate} and #{employee.conversiontime}
      </if>
