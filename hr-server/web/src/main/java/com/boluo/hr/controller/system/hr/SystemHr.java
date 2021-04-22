@@ -6,6 +6,7 @@ import com.boluo.hr.pojo.Role;
 import com.boluo.hr.service.HrService;
 import com.boluo.hr.service.RightsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -76,13 +77,15 @@ public class SystemHr {
         return RespBean.ok("删除失败！");
     }
 
-    @GetMapping("/hrname/{name}")
-    public List<Hr> someHrByHrName(@PathVariable("name") String name) {
-        return hrService.selectSomeHrsByHrName(name);
+    @PostMapping("/hrname")
+    public List<Hr> someHrByHrName(Hr hr) {
+        return hrService.selectSomeHrsByHrName(hr.getName());
     }
 
     @PutMapping("/one/")
     public RespBean addHr(Hr hr) {
+        BCryptPasswordEncoder bCryp = new BCryptPasswordEncoder();
+        hr.setPassword(bCryp.encode(hr.getPassword()));
         int i = hrService.addHr(hr);
         if(i==1) {
             return RespBean.ok("新建成功！");

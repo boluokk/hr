@@ -52,7 +52,7 @@
     from hr h
 		left join hr_role hro on h.id = hro.hrid
 		left join role r on r.id = hro.rid
-    and h.name like concat('%',#{hrName},'%');
+    where h.name like concat('%',#{hrName},'%');
   </select>
   <select id="selectBypageSize" resultMap="SysHr">
     select h.id, h.name, h.phone, h.telephone, h.address, h.enabled,h.userface, h.remark,r.id as rid,r.nameZh as rnameZh
