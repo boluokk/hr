@@ -37,8 +37,6 @@ public class MailReceiver {
     @RabbitListener(queues = MailConstans.MAIL_QUEUE_NAME)
     public void handler(Message message) {
         Employee employee = (Employee) message.getPayload();
-//        MessageHeaders headers = message.getHeaders();
-//        String msgID = (String)headers.get("spring_returned_message_correlation");
 //        消息转发
         MimeMessage msg = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(msg);
